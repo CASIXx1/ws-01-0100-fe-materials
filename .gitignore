@@ -1,2 +1,12 @@
 .DS_Store
-node_modules
+node_modules/
+
+# build files
+0100-html-css/stylesheets/style.css
+0100-html-css/stylesheets/style.css.map
+
+# jetbrains idea
+.idea/
+
+# terminal history
+$HOME/.local/share/fish-webstorm/fish/fish_history
