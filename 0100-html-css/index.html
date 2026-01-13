@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <title>Turvo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,57 +7,133 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   </head>
-  <header class="header">
-    <div class="header__content">
-      <div class="header__left-content">
-        <a href="/main">
-          <div class="header__logo">
-            <h2>Turvo</h2>
+  <body>
+    <header class="header">
+      <div class="header__content">
+        <div class="header__left-content">
+          <a href="/main">
+            <div class="header__logo">
+              <h2>Turvo</h2>
+            </div>
+          </a>
+          <div class="header__search">
+            <div class="header__container">
+              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#94ae9f" height="24" width="24" xmlns="http://www.w3.org/2000/svg" style="color: rgb(148, 174, 159);">
+                <path d="M456.69 421.39 362.6 327.3a173.81 173.81 0 0 0 34.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 0 0 327.3 362.6l94.09 94.09a25 25 0 0 0 35.3-35.3zM97.92 222.72a124.8 124.8 0 1 1 124.8 124.8 124.95 124.95 0 0 1-124.8-124.8z"></path>
+              </svg>
+            </div>
           </div>
-        </a>
-        <div>
-          <div>
-            <div class="header__search">
-              <div class="header__container">
-                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#94ae9f" height="24" width="24" xmlns="http://www.w3.org/2000/svg" style="color: rgb(148, 174, 159);">
-                  <path d="M456.69 421.39 362.6 327.3a173.81 173.81 0 0 0 34.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 0 0 327.3 362.6l94.09 94.09a25 25 0 0 0 35.3-35.3zM97.92 222.72a124.8 124.8 0 1 1 124.8 124.8 124.95 124.95 0 0 1-124.8-124.8z"></path>
+          <div class="header__popup"></div>
+        </div>
+        <div class="header__right-content">
+          <ul class="header__menu">
+            <li class="header__menu-item">
+              <div class="header__icon-button">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 112v288m144-144H112"></path>
                 </svg>
               </div>
-              <input placeholder="タスクタイトルで検索" type="text" value>
-            </div>
-            <div class="header__popup"></div>
+            </li>
+            <li class="header__menu-item">
+              <div class="header__icon-button">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M256 56C145.72 56 56 145.72 56 256s89.72 200 200 200 200-89.72 200-200S366.28 56 256 56zm0 82a26 26 0 1 1-26 26 26 26 0 0 1 26-26zm64 226H200v-32h44v-88h-32v-32h64v120h44z"></path>
+                </svg>
+              </div>
+            </li>
+            <li class="header__menu-item">
+              <div class="header__icon-button">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M256 480a80.09 80.09 0 0 0 73.3-48H182.7a80.09 80.09 0 0 0 73.3 48zm144-192v-60.53C400 157 372.64 95.61 304 80l-8-48h-80l-8 48c-68.88 15.61-96 76.76-96 147.47V288l-48 64v48h384v-48z"></path>
+                </svg>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <div class="sidebar sidebar--show">
+        <div class="sidebar__content">
+          <div class="sidebar__header">
+            <span class="sidebar__toggle">
+              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M328 112 184 256l144 144"></path>
+              </svg>
+            </span>
+          </div>
+          <div class="sidebar__body">
+            <ul class="sidebar__menu">
+              <li>
+                <a href="/main">
+                  <div class="sidebar__menu-item sidebar__menu-item--active">
+                    <p class="sidebar__menu-title sidebar__menu-title">ダッシュボード</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/main/tasks">
+                  <div class="sidebar__menu-item">
+                    <p class="sidebar__menu-title">タスク</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <div class="sidebar__menu-item">
+                  <p class="sidebar__menu-title">
+                    プロジェクト
+                    <a href="/main/projects/new">
+                      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 112v288m144-144H112"></path>
+                      </svg>
+                    </a>
+                  </p>
+                </div>
+                <ul class="sidebar__children">
+                  <li class="sidebar__menu-item">
+                    <a href="/main/projects/programming">
+                      <div class="sidebar__project">
+                        <div>
+                          <span class="sidebar__project-dot" style="background: rgba(0, 0, 140, 0.6);"></span>
+                          プログラミング
+                        </div>
+                        <span class="sidebar__project-deadline">2025/02/20</span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="sidebar__menu-item">
+                    <a href="/main/projects/english">
+                      <div class="sidebar__project">
+                        <div>
+                          <span class="sidebar__project-dot" style="background: rgba(0, 25, 255, 0.6);"></span>
+                          英語
+                        </div>
+                        <span class="sidebar__project-deadline">2025/02/21</span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="sidebar__menu-item">
+                    <a href="/main/projects/private">
+                      <div class="sidebar__project">
+                        <div>
+                          <span class="sidebar__project-dot" style="background: rgba(0, 165, 255, 0.6);"></span>
+                          プライベート
+                        </div>
+                        <span class="sidebar__project-deadline">2025/02/22</span>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+                <a href="/main/projects">
+                  <p class="sidebar__project-show-more">あと 15 プロジェクト</p>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <div class="header__right-content">
-        <ul class="header__menu">
-          <li class="header__menu-item">
-            <div class="header__icon-button">
-              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
-                <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 112v288m144-144H112"></path>
-              </svg>
-            </div>
-          </li>
-          <li class="header__menu-item">
-            <div class="header__icon-button">
-              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M256 56C145.72 56 56 145.72 56 256s89.72 200 200 200 200-89.72 200-200S366.28 56 256 56zm0 82a26 26 0 1 1-26 26 26 26 0 0 1 26-26zm64 226H200v-32h44v-88h-32v-32h64v120h44z"></path>
-              </svg>
-            </div>
-          </li>
-          <li class="header__menu-item">
-            <div class="header__icon-button">
-              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M256 480a80.09 80.09 0 0 0 73.3-48H182.7a80.09 80.09 0 0 0 73.3 48zm144-192v-60.53C400 157 372.64 95.61 304 80l-8-48h-80l-8 48c-68.88 15.61-96 76.76-96 147.47V288l-48 64v48h384v-48z"></path>
-              </svg>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
-  <body class="body">
+    </main>
   </body>
+</html>
 
