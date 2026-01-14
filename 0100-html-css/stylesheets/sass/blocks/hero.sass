@@ -1,4 +1,5 @@
 @use '../shared/variable' as v
+@use '../shared/mixin' as m
 
 .hero
   justify-content: center
@@ -52,9 +53,7 @@
       animation: none
 
   &__gradient
-    background: linear-gradient(90deg, #4bcaa0 0%, #2ed9ff 100%)
-    -webkit-text-fill-color: #0000
-    -webkit-background-clip: text
+    @include m.gradient
 
   &__copy-sub-text
     width: 60ch

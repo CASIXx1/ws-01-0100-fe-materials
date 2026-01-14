@@ -1,4 +1,5 @@
 @use '../shared/variable' as v
+@use '../shared/mixin' as m
 
 .header
   display: flex
@@ -62,10 +63,8 @@
         justify-content: flex-end
 
   &__container
-    justify-content: center
-    align-items: center
+    @include m.flex-center
     height: 100%
-    display: flex
 
   &__signup
     @media (max-width: 992px)
