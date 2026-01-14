@@ -1,0 +1,28 @@
+@use '../shared/variable' as v
+
+.header
+  display: flex
+  position: absolute
+  top: 0
+  width: 100%
+  padding: 16px
+  justify-content: space-between
+  color: v.$font-color-dark
+  z-index: v.$z-index-public-header
+
+  &__logo
+    display: flex
+
+    a
+      color: v.$font-color-dark
+      text-decoration: none
+
+    &-text
+      font-size: 14px
+
+    &-content
+      align-items: center
+      display: flex
+
+  &__logo-image
+    margin-right: 8px
