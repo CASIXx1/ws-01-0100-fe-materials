@@ -1,3 +1,5 @@
+@use '../shared/variable' as v
+
 @mixin gradient
   background: linear-gradient(90deg, #4bcaa0 0%, #2ed9ff 100%)
   -webkit-text-fill-color: #0000
@@ -7,3 +9,18 @@
   justify-content: center
   align-items: center
   display: flex
+
+@mixin cta-button
+  cursor: pointer
+  background: v.$primary-color
+  color: #fff
+  border-radius: 8px
+  justify-content: center
+  width: 360px
+  margin: 64px auto auto
+  padding: 16px 32px
+  transition: background .5s
+  display: flex
+
+  &:hover
+    background: v.$primary-color-darker

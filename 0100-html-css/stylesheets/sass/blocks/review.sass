@@ -1,0 +1,57 @@
+@use '../shared/variable' as v
+@use '../shared/mixin' as m
+
+.review
+  margin-bottom: 64px
+  padding: 0 128px
+
+  @media (max-width: 992px)
+    padding: 0 16px
+
+  &__header-title
+    text-align: center
+    font-size: 18px
+
+  &__content
+    justify-content: space-evenly
+    margin-top: 128px
+    padding: 0 128px
+    display: flex
+
+    @media (max-width: 992px)
+      flex-wrap: wrap
+      margin-top: 64px
+      padding: 0 16px
+
+  &__col
+    width: 280px
+    margin-right: 32px
+
+    @media (max-width: 992px)
+      min-width: 280px
+      margin-bottom: 128px
+
+  &__avatar
+    @include m.flex-center
+
+  &__avatar-image
+    object-fit: cover
+    border-radius: 50%
+    width: 64px
+    height: 64px
+
+  &__profile
+    text-align: center
+    margin: 32px 0
+    font-weight: 700
+
+  &__description
+    color: v.$top-font-weak-color
+
+  &__footer
+    justify-content: center
+    margin: 128px 0
+    display: flex
+
+  &__cta
+    @include m.cta-button

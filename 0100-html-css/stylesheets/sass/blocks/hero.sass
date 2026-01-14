@@ -74,19 +74,7 @@
       animation: none
 
   &__cta
-    cursor: pointer
-    background: v.$primary-color
-    color: #fff
-    border-radius: 8px
-    justify-content: center
-    width: 360px
-    margin: 64px auto auto
-    padding: 16px 32px
-    transition: background .5s
-    display: flex
-
-    &:hover
-      background: v.$primary-color-darker
+    @include m.cta-button
 
   &__cta--animated
     animation: 6s step-end page-module-scss-module__rcUngW__showup, 1s 6s page-module-scss-module__rcUngW__fadein
