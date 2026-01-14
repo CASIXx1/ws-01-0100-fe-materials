@@ -1,0 +1,31 @@
+@use '../shared/variable' as v
+
+.button
+  cursor: pointer
+  letter-spacing: 1.4px
+  border: 0
+  border-radius: 4px
+  width: 100%
+  padding: 8px 16px
+  font-size: 10px
+  transition: box-shadow .5s, opacity .5s
+
+  &:hover
+    box-shadow: 2px 2px 4px 1px v.$button-shadow
+
+.button--primary
+  background: v.$primary-color
+  color: v.$font-color-light
+  transition: background .5s
+  box-shadow: 2px 2px 4px 1px #1e514036
+
+  &:hover
+    background: v.$primary-color-darker
+
+.button--secondary
+  background: v.$secondary-color
+  color: v.$font-color-light
+  box-shadow: 2px 2px 4px 1px #22222280
+
+  &:hover
+    opacity: .8
