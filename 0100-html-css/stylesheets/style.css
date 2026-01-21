@@ -83,12 +83,12 @@ a {
 .header__logo {
   display: flex;
 }
+.header__logo-text {
+  font-size: 14px;
+}
 .header__logo-link {
   color: #55655c;
   text-decoration: none;
-}
-.header__logo-text {
-  font-size: 14px;
 }
 .header__logo-content {
   align-items: center;
