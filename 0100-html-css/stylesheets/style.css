@@ -83,7 +83,7 @@ a {
 .header__logo {
   display: flex;
 }
-.header__logo a {
+.header__logo-link {
   color: #55655c;
   text-decoration: none;
 }
