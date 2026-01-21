@@ -206,16 +206,16 @@ a {
   display: block;
   overflow: hidden;
 }
-@media (max-width: 992px) {
-  .hero__first-line {
-    font-size: 48px;
-  }
-}
 @media (max-width: 576px) {
   .hero__first-line {
     width: 100%;
     font-size: 32px;
     animation: none;
+  }
+}
+@media (max-width: 992px) {
+  .hero__first-line {
+    font-size: 48px;
   }
 }
 .hero__second-line {
@@ -227,16 +227,16 @@ a {
   display: block;
   overflow: hidden;
 }
-@media (max-width: 992px) {
-  .hero__second-line {
-    font-size: 48px;
-  }
-}
 @media (max-width: 576px) {
   .hero__second-line {
     width: 100%;
     font-size: 32px;
     animation: none;
+  }
+}
+@media (max-width: 992px) {
+  .hero__second-line {
+    font-size: 48px;
   }
 }
 .hero__gradient {

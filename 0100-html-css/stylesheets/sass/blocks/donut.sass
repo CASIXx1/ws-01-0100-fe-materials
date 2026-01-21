@@ -1,4 +1,5 @@
 @use '../shared/variable' as v
+@use '../shared/mixin' as m
 
 .donut
   display: flex
@@ -9,7 +10,7 @@
   justify-content: center
   align-items: center
 
-  @media (max-width: 992px)
+  @include m.media-md
     display: none
 
   &__inner

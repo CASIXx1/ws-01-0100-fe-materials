@@ -1,4 +1,5 @@
 @use '../shared/variable' as v
+@use '../shared/mixin' as m
 
 .footer
   background: v.$bg-color-light-2
@@ -13,14 +14,14 @@
     padding: 64px 128px
     display: flex
 
-    @media (max-width: 992px)
+    @include m.media-md
       flex-wrap: wrap
       padding: 16px
 
   &__left
     margin-right: auto
 
-    @media (max-width: 992px)
+    @include m.media-md
       margin-bottom: 64px
 
   &__logo
@@ -37,7 +38,7 @@
     margin-right: 16px
     display: flex
 
-    @media (max-width: 992px)
+    @include m.media-md
       flex-wrap: wrap
 
   &__menu-item

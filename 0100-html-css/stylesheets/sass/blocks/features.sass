@@ -1,4 +1,5 @@
 @use '../shared/variable' as v
+@use '../shared/mixin' as m
 
 .features
   flex-wrap: wrap
@@ -11,7 +12,7 @@
     margin-bottom: 128px
     margin-right: 64px
 
-    @media (max-width: 576px)
+    @include m.media-sm
       margin: auto auto 128px
 
   &__description
