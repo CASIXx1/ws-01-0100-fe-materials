@@ -13,19 +13,35 @@
   &:hover
     box-shadow: 2px 2px 4px 1px v.$button-shadow
 
-.button--primary
-  background: v.$primary-color
-  color: v.$font-color-light
-  transition: background .5s
-  box-shadow: 2px 2px 4px 1px #1e514036
+  &--primary
+    background: v.$primary-color
+    color: v.$font-color-light
+    transition: background .5s
+    box-shadow: 2px 2px 4px 1px #1e514036
 
-  &:hover
-    background: v.$primary-color-darker
+    &:hover
+      background: v.$primary-color-darker
 
-.button--secondary
-  background: v.$secondary-color
-  color: v.$font-color-light
-  box-shadow: 2px 2px 4px 1px #22222280
+  &--secondary
+    background: v.$secondary-color
+    color: v.$font-color-light
+    box-shadow: 2px 2px 4px 1px #22222280
 
-  &:hover
-    opacity: .8
+    &:hover
+      opacity: .8
+
+  &--cta
+    cursor: pointer
+    background: v.$primary-color
+    color: #fff
+    border-radius: 8px
+    justify-content: center
+    width: 360px
+    margin: 64px auto auto
+    padding: 16px 32px
+    transition: background .5s
+    display: flex
+
+    &:hover
+      background: v.$primary-color-darker
+

@@ -158,7 +158,6 @@ a {
 .button:hover {
   box-shadow: 2px 2px 4px 1px rgba(34, 34, 34, 0.1254901961);
 }
-
 .button--primary {
   background: #42b883;
   color: white;
@@ -168,7 +167,6 @@ a {
 .button--primary:hover {
   background: #0d864f;
 }
-
 .button--secondary {
   background: #1c3041;
   color: white;
@@ -176,6 +174,21 @@ a {
 }
 .button--secondary:hover {
   opacity: 0.8;
+}
+.button--cta {
+  cursor: pointer;
+  background: #42b883;
+  color: #fff;
+  border-radius: 8px;
+  justify-content: center;
+  width: 360px;
+  margin: 64px auto auto;
+  padding: 16px 32px;
+  transition: background 0.5s;
+  display: flex;
+}
+.button--cta:hover {
+  background: #0d864f;
 }
 
 .hero {
@@ -265,21 +278,6 @@ a {
     font-size: 16px;
     animation: none;
   }
-}
-.hero__cta {
-  cursor: pointer;
-  background: #42b883;
-  color: #fff;
-  border-radius: 8px;
-  justify-content: center;
-  width: 360px;
-  margin: 64px auto auto;
-  padding: 16px 32px;
-  transition: background 0.5s;
-  display: flex;
-}
-.hero__cta:hover {
-  background: #0d864f;
 }
 .hero__cta--animated {
   animation: 6s step-end hero__showup, 1s 6s hero__fadein;
@@ -514,21 +512,6 @@ a {
   justify-content: center;
   margin: 128px 0;
   display: flex;
-}
-.review__cta {
-  cursor: pointer;
-  background: #42b883;
-  color: #fff;
-  border-radius: 8px;
-  justify-content: center;
-  width: 360px;
-  margin: 64px auto auto;
-  padding: 16px 32px;
-  transition: background 0.5s;
-  display: flex;
-}
-.review__cta:hover {
-  background: #0d864f;
 }
 
 .footer {
