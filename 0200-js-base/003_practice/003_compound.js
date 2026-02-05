@@ -6,6 +6,21 @@
  */
 
 function flatten(list) {
+  let flattenArray = [];
+
+  for (let i = 0; i < list.length; i++) {
+    let listItem = list[i];
+
+    if (Array.isArray(listItem)) {
+      for (let j = 0; j < listItem.length; j++) {
+        flattenArray.push(listItem[j]);
+      }
+    } else {
+      flattenArray.push(listItem);
+    }
+  }
+
+  return flattenArray;
 }
 
 /**
@@ -26,6 +41,13 @@ function flatten(list) {
  */
 
 function toMap(list) {
+  let map = {};
+
+  for (const value of list) {
+    map[value] = true;
+  }
+
+  return map;
 }
 
 /**
@@ -38,6 +60,14 @@ function toMap(list) {
  */
 
 function toList(obj) {
+  let list = [];
+
+  for (const key in obj) {
+    list.push(key);
+    list.push(obj[key]);
+  }
+
+  return list;
 }
 
 /**
@@ -58,6 +88,13 @@ function toList(obj) {
  */
 
 function ids(obj) {
+  let ids = [];
+
+  for (let value of obj) {
+    ids.push(value['id']);
+  }
+
+  return ids;
 }
 
 /**
@@ -74,6 +111,19 @@ function ids(obj) {
  */
 
 function merge(a, b) {
+  let mergeList = [];
+
+  for (let value of a) {
+    mergeList.push(value);
+  }
+
+  for (let value of b) {
+    if (!mergeList.includes(value)) {
+      mergeList.push(value);
+    }
+  }
+
+  return mergeList;
 }
 
 /**
@@ -89,6 +139,15 @@ function merge(a, b) {
  */
 
 function intersection(a, b) {
+  let intersectionList = [];
+
+  for (let value of b) {
+    if(a.includes(value)) {
+      intersectionList.push(value);
+    }
+  }
+
+  return intersectionList;
 }
 
 /**
@@ -105,6 +164,22 @@ function intersection(a, b) {
  */
 
 function mergeObjOfArray(a, b) {
+  let idMap = new Map();
+
+  for (let value of a) {
+    idMap.set(value.id, value);
+  }
+
+  for (let value of b) {
+    if (idMap.has(value.id)) {
+      const aValue = idMap.get(value.id);
+      idMap.set(value.id, Object.assign({}, aValue, value));
+    } else {
+      idMap.set(value.id, value);
+    }
+  }
+
+  return Array.from(idMap.values());
 }
 
 /**
@@ -120,6 +195,30 @@ function mergeObjOfArray(a, b) {
  */
 
 function sum(data) {
+  let sum = 0;
+  let stack = [];
+
+  stack.push(...data);
+
+  while (stack.length > 0) {
+    let popValue = stack.pop();
+
+    if (Array.isArray(popValue)) {
+      for (const item of popValue) {
+        stack.push(item);
+      }
+    } else if (popValue !== null && typeof popValue === 'object') {
+      for (let [key, value] of Object.entries(popValue)) {
+        if (key === 'count') {
+          sum += value;
+        } else {
+          stack.push(value);
+        }
+      }
+    }
+  }
+
+  return sum;
 }
 
 module.exports = {
