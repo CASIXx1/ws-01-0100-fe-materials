@@ -1,0 +1,19 @@
+@use '../shared/variable' as v
+
+@mixin gradient
+  background: linear-gradient(90deg, #4bcaa0 0%, #2ed9ff 100%)
+  -webkit-text-fill-color: #0000
+  -webkit-background-clip: text
+
+@mixin flex-center
+  justify-content: center
+  align-items: center
+  display: flex
+
+@mixin media-sm
+  @media (max-width: v.$breakpoint-sm)
+    @content
+
+@mixin media-lg
+  @media (max-width: v.$breakpoint-lg)
+    @content

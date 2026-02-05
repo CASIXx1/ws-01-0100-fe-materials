@@ -1,0 +1,96 @@
+@use '../shared/variable' as v
+@use '../shared/mixin' as m
+
+.price
+  margin: 64px 0
+
+  &__table
+    justify-content: center
+    margin-top: 128px
+    display: flex
+
+    @include m.media-lg
+      flex-wrap: wrap
+
+  &__header-title
+    text-align: center
+    font-size: 18px
+
+  &__sub-header
+    text-align: center
+    margin-top: 32px
+    font-size: 12px
+
+    @include m.media-lg
+      padding: 16px
+
+  &__plan-header
+    width: 240px
+
+  &__plan-name
+    font-size: 18px
+    font-weight: 700
+
+  &__plan-description
+    height: 100px
+    color: v.$top-font-weak-color
+    padding: 16px 0
+    font-size: 12px
+
+  &__plan-row
+    text-align: center
+    align-items: center
+    display: flex
+
+    @include m.media-lg
+      height: auto
+
+  &__plan-row-body
+    text-align: left
+    padding: 16px
+
+  &__plan-price
+    letter-spacing: .2rem
+    white-space: nowrap
+    padding: 16px 0
+    font-size: 64px
+    font-weight: 700
+
+  &__icon-circle
+    background: #d6f5eb
+    border-radius: 50%
+    width: 16px
+    height: 16px
+
+  &__icon-container
+    @include m.flex-center
+    height: 100%
+
+  &__col
+    margin-right: 32px
+
+    @include m.media-sm
+      margin-bottom: 64px
+
+    @include m.media-lg
+      margin: auto
+
+  &__tag
+    color: v.$font-color-dark
+    margin: 16px 0
+    font-size: 12px
+
+  &__container
+    border: 1px solid v.$border-color-light
+    background: v.$background-color
+    border-radius: 8px
+    width: 360px
+    padding: 32px
+    box-shadow: 1px 1px 8px 4px #f9f9f9
+
+    @include m.media-lg
+      min-width: 100%
+      margin-bottom: 64px
+
+  &__gradient
+    @include m.gradient

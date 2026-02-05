@@ -1,14 +1,475 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
-    <title>Turbo</title>
+    <title>Turvo</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <meta name="description" content="Turbo は目標達成をサポートするシンプルな TODO アプリです。様々な角度から練られた鮮明なゴール設定、精緻な計画を助けます。
+  ※Turvo は学習用のサンプルアプリです。 詳細 https://github.com/version1-workspace/ws-01-000-real-todo">
+    <meta property="og:title" content="Turvo">
+    <meta property="og:description" content="Turbo は目標達成をサポートするシンプルな TODO アプリです。様々な角度から練られた鮮明なゴール設定、精緻な計画を助けます。
+  ※Turvo は学習用のサンプルアプリです。 詳細 https://github.com/version1-workspace/ws-01-000-real-todo">
+    <meta property="og:image" content="https://version1-real-todo.netlify.app/opengraph-image.png?opengraph-image.43f1265d.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Turvo">
+    <meta name="twitter:description" content="Turbo は目標達成をサポートするシンプルな TODO アプリです。様々な角度から練られた鮮明なゴール設定、精緻な計画を助けます。
+  ※Turvo は学習用のサンプルアプリです。 詳細 https://github.com/version1-workspace/ws-01-000-real-todo">
+    <meta name="twitter:image" content="https://version1-real-todo.netlify.app/twitter-image.png?twitter-image.43f1265d.png">
+    <meta name="twitter:image:width" content="1200">
+    <meta name="twitter:image:height" content="630">
+    <meta name="twitter:image:type" content="image/png">
+    <link rel="icon" href="assets/favicon.ico" sizes="48x48" type="image/x-icon">
   </head>
   <body class="body">
+    <main class="main">
+      <div class="donut" style="background:#2ED9FF;top:240px;right:-240px">
+        <div class="donut__inner"></div>
+      </div>
+      <div class="donut" style="background:#4BCAA0;top:600px;left:-240px">
+        <div class="donut__inner"></div>
+      </div>
+      <div class="donut" style="background:#41ADC5;top:2200px;left:-240px">
+        <div class="donut__inner"></div>
+      </div>
+      <div class="donut" style="background:#009362;top:2800px;right:-240px">
+        <div class="donut__inner"></div>
+      </div>
+
+      <header class="header">
+        <div class="header__logo">
+          <a class="header__logo-link" href="/">
+            <div class="header__logo-content ">
+              <img alt="ロゴ" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" class="header__logo-image" style="color:transparent" src="assets/logo.png">
+              <h2 class="header__logo-text">Turvo</h2>
+            </div>
+          </a>
+        </div>
+        <div class="header__right">
+          <ul class="header__menu">
+            <li class="header__menu-item">
+              <a class="header__menu-link" href="/">Home</a>
+            </li>
+            <li class="header__menu-item">
+              <a class="header__menu-link" href="/">Turvo について</a>
+            </li>
+            <li class="header__menu-item">
+              <a class="header__menu-link" href="/">ドキュメント</a>
+            </li>
+          </ul>
+          <div>
+            <a target="_blank" rel="noopener noreferrer" href="https://github.com/version1-workspace/ws-01-000-real-todo">
+              <div class="header__container">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M256 32C132.3 32 32 134.9 32 261.7c0 101.5 64.2 187.5 153.2 217.9a17.56 17.56 0 0 0 3.8.4c8.3 0 11.5-6.1 11.5-11.4 0-5.5-.2-19.9-.3-39.1a102.4 102.4 0 0 1-22.6 2.7c-43.1 0-52.9-33.5-52.9-33.5-10.2-26.5-24.9-33.6-24.9-33.6-19.5-13.7-.1-14.1 1.4-14.1h.1c22.5 2 34.3 23.8 34.3 23.8 11.2 19.6 26.2 25.1 39.6 25.1a63 63 0 0 0 25.6-6c2-14.8 7.8-24.9 14.2-30.7-49.7-5.8-102-25.5-102-113.5 0-25.1 8.7-45.6 23-61.6-2.3-5.8-10-29.2 2.2-60.8a18.64 18.64 0 0 1 5-.5c8.1 0 26.4 3.1 56.6 24.1a208.21 208.21 0 0 1 112.2 0c30.2-21 48.5-24.1 56.6-24.1a18.64 18.64 0 0 1 5 .5c12.2 31.6 4.5 55 2.2 60.8 14.3 16.1 23 36.6 23 61.6 0 88.2-52.4 107.6-102.3 113.3 8 7.1 15.2 21.1 15.2 42.5 0 30.7-.3 55.5-.3 63 0 5.4 3.1 11.5 11.4 11.5a19.35 19.35 0 0 0 4-.4C415.9 449.2 480 363.1 480 261.7 480 134.9 379.7 32 256 32z"></path>
+                </svg>
+              </div>
+            </a>
+          </div>
+          <div class="header__actions">
+            <a class="header__signup" href="/auth/signup">
+              <button class="button button--primary" type="button">無料で始める</button>
+            </a>
+            <a href="/auth/login">
+              <button class="button button--secondary" type="button">サインイン</button>
+            </a>
+          </div>
+        </div>
+      </header>
+          <div class="hero">
+            <div class="hero__copy">
+              <h1 class="hero__copy-text">
+                <span class="hero__first-line">
+                  <span class="hero__gradient">
+                    Transform
+                  </span>
+                  your tasks
+                </span>
+                <span class="hero__second-line">
+                  into
+                  <span class="hero__gradient">
+                    acheivements
+                  </span>
+                </span>
+              </h1>
+          <p class="hero__copy-sub-text">
+            TODO app that revolutionizes your life and helps you achieve your dreams.
+          </p>
+          <a class="button--cta hero__cta--animated" href="/login">
+            無料で始める
+          </a>
+        </div>
+      </div>
+      <div class="features">
+        <div class="features__col">
+          <h2 class="features__title">ゴールを鮮明にイメージ</h2>
+          <div class="features__description">
+            さまざまな角度から練られた目標は目標達成のために必要不可欠な要素です。Turvo .では、具体的な期日や目標達成までに必要な意識を設定して、あなたの目標達成を助けます。
+          </div>
+        </div>
+        <div class="features__col">
+          <h2 class="features__title">精緻な計画をサポート</h2>
+          <div class="features__description">
+            Turvo ではマイルストーン（中間目標）を設定することができます。長い道のりでも迷わずにゴールに向かえるような計画策定を助けます。マイルストーンを設定してより精緻な計画を作り上げましょう。
+          </div>
+        </div>
+        <div class="features__col">
+          <h2 class="features__title">シンプルなUI</h2>
+          <div class="features__description">
+            Turvo は見やすいダッシュボードで複数の目標を管理することができます。仕事の目標、キャリアの目標、プライベートの目標など個人に関係する目標をまとめて管理することができます。
+          </div>
+        </div>
+      </div>
+      <div class="price">
+        <div>
+          <h2 class="price__header-title">料金</h2>
+          <p class="price__sub-header">
+            ※ 学習用アプリなので、ダミーの料金表です。プランに関する機能は未実装です。
+          </p>
+        </div>
+        <div>
+          <div class="price__table">
+            <div class="price__col">
+              <div class="price__container">
+                <div class="price__plan-header">
+                  <div class="price__plan-name">
+                    Basic
+                  </div>
+                  <div class="price__plan-description">
+                    無料のプランでTurvoを始めよう。 スタートには十分なプランを揃えて お待ちしております。
+                  </div>
+                  <div class="price__plan-price">
+                    <span class="price__gradient">Free</span>
+                    <p class="price__tag">円 / 月</p>
+                  </div>
+                </div>
+                <div>
+                  <div class="price__plan-row">
+                    <div>
+                      <div class="price__icon-circle">
+                        <div class="price__icon-container">
+                          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M416 128 192 384l-96-96"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="price__plan-row-body">3つまでプロジェクトを管理可能</p>
+                  </div>
+                  <div class="price__plan-row"><div>
+                    <div class="price__icon-circle">
+                      <div class="price__icon-container">
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                          <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M416 128 192 384l-96-96"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                    <p class="price__plan-row-body">ダッシュボード機能を無制限 に利用可能</p>
+                  </div>
+                  <div class="price__plan-row">
+                    <div>
+                      <div class="price__icon-circle">
+                        <div class="price__icon-container">
+                          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M416 128 192 384l-96-96"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="price__plan-row-body">無料の範囲内でのテーマの選択・ 変更可能</p>
+                  </div>
+                  <div class="price__plan-row"><div>
+                    <div class="price__icon-circle">
+                      <div class="price__icon-container">
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                          <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M416 128 192 384l-96-96"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                    <p class="price__plan-row-body">デフォルトのリマインダの利用 可能</p>
+                  </div>
+                  <div class="price__plan-row"><div>
+                    <div class="price__icon-circle">
+                      <div class="price__icon-container">
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                          <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M416 128 192 384l-96-96"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                    <p class="price__plan-row-body">一部のWeb API の利用可能</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="price__col">
+              <div class="price__container">
+                <div class="price__plan-header">
+                  <div class="price__plan-name">Professional</div>
+                  <div class="price__plan-description">
+                    多くのプロジェクトを管理したくなったら Professional プランにアップグレードして Turvo の機能を使い切りましょう
+                  </div>
+                  <div class="price__plan-price">
+                    <span class="price__gradient">980</span>
+                    <p class="price__tag">円 / 月</p>
+                  </div>
+                </div>
+                <div>
+                  <div class="price__plan-row">
+                    <div>
+                      <div class="price__icon-circle">
+                        <div class="price__icon-container">
+                          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M416 128 192 384l-96-96"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="price__plan-row-body">無制限にプロジェクトを管理可能</p>
+                  </div>
+                  <div class="price__plan-row">
+                    <div>
+                      <div class="price__icon-circle">
+                        <div class="price__icon-container">
+                          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M416 128 192 384l-96-96"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="price__plan-row-body">ダッシュボード機能を無制限 に利用可能</p>
+                  </div>
+                  <div class="price__plan-row">
+                    <div>
+                      <div class="price__icon-circle">
+                        <div class="price__icon-container">
+                          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M416 128 192 384l-96-96"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="price__plan-row-body">無制限でテーマの選択・変更可能</p>
+                  </div>
+                  <div class="price__plan-row">
+                    <div>
+                      <div class="price__icon-circle">
+                        <div class="price__icon-container">
+                          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M416 128 192 384l-96-96"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="price__plan-row-body">リマインダ・カスタマイズ機能 使用可</p>
+                  </div>
+                  <div class="price__plan-row">
+                    <div>
+                      <div class="price__icon-circle">
+                        <div class="price__icon-container">
+                          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M416 128 192 384l-96-96"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="price__plan-row-body">一部のWeb API の利用可能</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="price__col">
+              <div class="price__container">
+                <div class="price__plan-header">
+                  <div class="price__plan-name">Premium</div>
+                  <div class="price__plan-description">
+                    Professionalプランの機能に加えて Web APIが利用可能でタスク管理を 自分なりにカスタマイズしてさらなる 効率化を目指しましょう。
+                  </div>
+                  <div class="price__plan-price">
+                    <span class="price__gradient">1,980</span>
+                    <p class="price__tag">円 / 月</p>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="price__plan-row">
+                    <div>
+                      <div class="price__icon-circle">
+                        <div class="price__icon-container">
+                          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
+                               color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em"
+                               xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+                                  d="M416 128 192 384l-96-96"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="price__plan-row-body">無制限にプロジェクトを管理可能</p></div>
+                  <div class="price__plan-row">
+                    <div>
+                      <div class="price__icon-circle">
+                        <div class="price__icon-container">
+                          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
+                               color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em"
+                               xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+                                  d="M416 128 192 384l-96-96"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="price__plan-row-body">ダッシュボード機能を無制限 に利用可能</p>
+                  </div>
+                  <div class="price__plan-row">
+                    <div>
+                      <div class="price__icon-circle">
+                        <div class="price__icon-container">
+                          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
+                               color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em"
+                               xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+                                  d="M416 128 192 384l-96-96"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="price__plan-row-body">無制限でテーマの選択・変更可能</p></div>
+                  <div class="price__plan-row">
+                    <div>
+                      <div class="price__icon-circle">
+                        <div class="price__icon-container">
+                          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
+                               color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em"
+                               xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+                                  d="M416 128 192 384l-96-96"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="price__plan-row-body">リマインダ・カスタマイズ機能 使用可</p>
+                  </div>
+                  <div class="price__plan-row">
+                    <div>
+                      <div class="price__icon-circle">
+                        <div class="price__icon-container">
+                          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
+                               color="#4BCAA0" style="color:#4BCAA0" height="1em" width="1em"
+                               xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+                                  d="M416 128 192 384l-96-96"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="price__plan-row-body">全てのWeb API の利用可能</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review">
+        <div>
+          <h2 class="review__header-title">ユーザーの声</h2>
+        </div>
+        <div class="review__content">
+          <div class="review__col">
+            <div>
+              <div class="review__avatar">
+                <img alt="アバター" loading="lazy" width="64" height="64" decoding="async" data-nimg="1" class="review__avatar-image" style="color:transparent" src="assets/review-1.jpg">
+              </div>
+              <div class="review__profile">
+                <p>Roberto Dixon</p>
+                <p>ソフトウェアエンジニア</p>
+              </div>
+            </div>
+            <div>
+              <p class="review__description">Turvo は自分の目標を管理するのに最適なツールです。 わかりやすい UI で登録したその日からすぐに活躍してくれました。</p>
+            </div>
+          </div>
+          <div class="review__col">
+            <div>
+              <div class="review__avatar">
+                <img alt="アバター" loading="lazy" width="64" height="64" decoding="async" data-nimg="1" class="review__avatar-image" style="color:transparent" src="assets/review-2.jpg">
+              </div>
+              <div class="review__profile">
+                <p>Carolyn Obrien</p>
+                <p>英語教師</p>
+              </div>
+            </div>
+            <div>
+              <p class="review__description">Turvo で自分の仕事とプライベートをうまくバランスできるようになりました。 仕事もプライベートもお互いに干渉するものですが、Turvo でそれらをまとめて管理できます。</p>
+            </div>
+          </div>
+          <div class="review__col">
+            <div>
+              <div class="review__avatar">
+                <img alt="アバター" loading="lazy" width="64" height="64" decoding="async" data-nimg="1" class="review__avatar-image" style="color:transparent" src="assets/review-3.jpg">
+              </div>
+              <div class="review__profile">
+                <p>Edward Hopkins</p>
+                <p>写真家</p>
+              </div>
+            </div>
+            <div>
+              <p class="review__description">Turvoのリマインド機能で常に長期の計画を意識しながら自分のプロジェクトを進めることができます。 長期の計画でも迷子にならずに進むのに最適なツールです。</p>
+            </div>
+          </div>
+        </div>
+        <div class="review__footer">
+          <a class="button--cta" href="/login">Turvo を始める</a>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="footer__content">
+          <div class="footer__left">
+            <div class="footer__logo">Turvo</div>
+            <div>Turvo で生活のゴールを決めて、<br>より良い生活を手に入れよう。</div>
+          </div>
+          <div class="footer__right">
+            <div class="footer__menu">
+              <div class="footer__menu-item">
+                <h3 class="footer__menu-title">Turvo について</h3>
+                <ul>
+                  <li class="footer__link-item"><a href="">Home</a></li>
+                  <li class="footer__link-item"><a href="">料金</a></li>
+                </ul>
+              </div>
+              <div class="footer__menu-item">
+                <h3 class="footer__menu-title">ドキュメント</h3>
+                <ul>
+                  <li class="footer__link-item"><a href="">Turvoの使い方</a></li>
+                  <li class="footer__link-item"><a href="">使用者のレビュー</a></li>
+                  <li class="footer__link-item"><a href="">プライバシーポリシー</a></li>
+                  <li class="footer__link-item"><a href="">個人情報保護方針 </a></li>
+                </ul>
+              </div>
+              <div class="footer__menu-item">
+                <h3 class="footer__menu-title">企業</h3>
+                <ul>
+                  <li class="footer__link-item"><a href="">会社概要</a></li>
+                  <li class="footer__link-item"><a href="">メディア</a></li>
+                  <li class="footer__link-item"><a href="">Twitter</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
   </body>
 </html>

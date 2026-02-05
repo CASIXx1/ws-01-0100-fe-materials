@@ -1,0 +1,51 @@
+@use '../shared/variable' as v
+@use '../shared/mixin' as m
+
+.footer
+  background: v.$bg-color-light-2
+  width: 100%
+
+  &__content
+    background: v.$bg-color-light-2
+    justify-content: space-evenly
+    width: 100%
+    max-width: 1920px
+    margin: auto
+    padding: 64px 128px
+    display: flex
+
+    @include m.media-lg
+      flex-wrap: wrap
+      padding: 16px
+
+  &__left
+    margin-right: auto
+
+    @include m.media-lg
+      margin-bottom: 64px
+
+  &__logo
+    letter-spacing: 4px
+    margin-bottom: 32px
+    font-size: 24px
+    font-weight: 700
+
+  &__right
+    align-items: center
+    display: flex
+
+  &__menu
+    margin-right: 16px
+    display: flex
+
+    @include m.media-lg
+      flex-wrap: wrap
+
+  &__menu-item
+    margin-right: 64px
+
+  &__menu-title
+    margin-bottom: 32px
+
+  &__link-item
+    margin-bottom: 16px

@@ -1,0 +1,23 @@
+@use '../shared/variable' as v
+@use '../shared/mixin' as m
+
+.donut
+  display: flex
+  position: absolute
+  width: 480px
+  height: 480px
+  border-radius: 50%
+  justify-content: center
+  align-items: center
+
+  @include m.media-lg
+    display: none
+
+  &__inner
+    display: flex
+    width: 240px
+    height: 240px
+    border-radius: 50%
+    justify-content: center
+    align-items: center
+    background: v.$background-color

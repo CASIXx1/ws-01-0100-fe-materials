@@ -1,0 +1,70 @@
+@use '../shared/variable' as v
+@use '../shared/mixin' as m
+
+.header
+  display: flex
+  position: absolute
+  top: 0
+  width: 100%
+  padding: 16px
+  justify-content: space-between
+  color: v.$font-color-dark
+  z-index: v.$z-index-public-header
+
+  &__logo
+    display: flex
+
+  &__logo-text
+    font-size: 14px
+
+  &__logo-link
+    color: v.$font-color-dark
+    text-decoration: none
+
+  &__logo-content
+    align-items: center
+    display: flex
+
+  &__logo-image
+    margin-right: 8px
+
+  &__right
+    align-items: center
+    display: flex
+
+  &__menu
+    margin-right: 16px
+    display: flex
+
+    @include m.media-lg
+      display: none
+
+  &__menu-item
+    margin-right: 16px
+    font-size: 12px
+
+  &__menu-link
+    vertical-align: middle
+    transition: color .5s
+    display: inline-block
+
+    &:hover
+      color: v.$primary-color-darker
+
+  &__actions
+    justify-content: space-evenly
+    align-items: center
+    min-width: 240px
+    display: flex
+
+    @include m.media-lg
+      &__actions
+        justify-content: flex-end
+
+  &__container
+    @include m.flex-center
+    height: 100%
+
+  &__signup
+    @include m.media-lg
+      display: none
