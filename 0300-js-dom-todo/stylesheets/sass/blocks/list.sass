@@ -1,0 +1,62 @@
+.list
+  padding: 32px
+
+.list__container
+  list-style: none
+  padding: 0
+
+.list__setting
+  padding: 16px
+  margin-bottom: 32px
+  display: flex
+  justify-content: flex-end
+
+.list__header
+  display: flex
+  align-items: center
+  border-bottom: 1px solid #f0f0f0
+  font-size: 12px
+
+.list__header-item
+  flex: 1
+  padding: 8px 16px
+  border-right: 1px solid #f0f0f0
+  font-size: 12px
+
+.list__header-item:last-child
+  border-right: 0
+
+.list__header-item--name
+  flex: 4
+
+.list__item
+  display: flex
+  align-items: center
+  width: 100%
+  border-bottom: 1px solid #f0f0f0
+  transition: opacity .8s
+
+.list__item--completed-dismissing
+  opacity: 0
+
+.list__item-col
+  box-sizing: border-box
+  flex: 1
+  padding: 16px
+  border-right: 1px solid #f0f0f0
+
+.list__item-col--name
+  cursor: pointer
+  flex: 4
+
+.list__item-col--deadline
+  cursor: pointer
+
+.list__item-col--checkbox
+  display: flex
+  justify-content: center
+
+.list__item-col--actions
+  font-size: 12px
+  display: flex
+  justify-content: center

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <title>Todo</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,7 +11,51 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <script src="https://kit.fontawesome.com/51423ebba7.js" crossorigin="anonymous"></script>
   </head>
+
   <body class="body">
+    <main class="main">
+      <div class="main__container">
+        <div class="main__header">
+          <h1 class="main__header-title">Todo</h1>
+        </div>
+        <div class="main__body">
+          <form class="form js-form">
+            <div class="form__input-group">
+              <div class="form__input form__input--name">
+                <label class="form__input-label">タスク</label>
+                <input name="name" type="text" class="form__input-field" placeholder="タスク名を入力">
+              </div>
+              <div class="form__input">
+                <label class="form__input-label">期限日</label>
+                <input name="deadline" type="date" class="form__input-field" placeholder="期限日を入力">
+              </div>
+            </div>
+            <div class="form__input-footer">
+              <button class="button button--primary">追加</button>
+            </div>
+          </form>
+          <div class="list">
+            <div class="list__setting">
+              <label class="list__setting-label">
+                <input type="checkbox" class="list__setting-input js-show-completed" />
+                完了タスクを表示
+              </label>
+            </div>
+            <div class="list__header">
+              <div class="list__header-item">&nbsp;</div>
+              <div class="list__header-item list__header-item--name">タスク</div>
+              <div class="list__header-item">期限日</div>
+              <div class="list__header-item">&nbsp;</div>
+            </div>
+
+            <div class="list__container js-list-container">
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
     <script src="js/lib.js"></script>
     <script src="js/function.js"></script>
   </body>
