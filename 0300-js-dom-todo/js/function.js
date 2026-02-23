@@ -31,8 +31,7 @@ function renderTasks(container) {
   }
 
   for (const task of tasks) {
-    let name = task.name;
-    let deadline = task.deadline;
+    const { name, deadline } = task;
     let li = document.createElement('li')
     let listItem = div('list__item');
     let listCheckbox = div('list__item-col list__item-col--checkbox');
