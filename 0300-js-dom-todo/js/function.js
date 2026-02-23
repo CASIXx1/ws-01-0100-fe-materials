@@ -81,7 +81,15 @@ function onSubmitTask(container){
   const name = String(formData.get('name'));
   const deadline = AppDate.parse(String(formData.get('deadline')));
 
-  if (!name || !deadline) return;
+  if (!name) {
+    alert('タスク名を入力してください。');
+    return;
+  }
+
+  if (!deadline) {
+    alert('期限日を入力してください。');
+    return;
+  }
 
   state.tasks.push({
     name: name,
