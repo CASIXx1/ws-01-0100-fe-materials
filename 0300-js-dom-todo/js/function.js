@@ -28,41 +28,48 @@ function renderTasks(container) {
   const tasks = state.tasks.filter(task => state.showCompleted || !task.completed)
 
   for (const task of tasks) {
-    const { name, deadline } = task;
-    let li = document.createElement('li')
-    let listItem = div('list__item');
-    let listCheckbox = div('list__item-col list__item-col--checkbox');
-    let checkboxLabel = checkbox(task.completed, (checked) => {
-      task.completed = checked;
-      renderTasks(container);
-    });
-
-    let listName = div('list__item-col list__item-col--name');
-    let listDeadline = div('list__item-col list__item-col--deadline');
-    let listActions = div('list__item-col list__item-col--actions');
-    let trash = icon('icon icon--trash fa-solid fa-trash', (checked) => {
-      const confirmed = window.confirm('このタスクを削除しますか？');
-      if (!confirmed) return;
-
-      state.tasks = state.tasks.filter((stateTask) => stateTask !== task)
-      renderTasks(container);
-    });
-
-    listName.classList.add('list__item-col');
-    listName.textContent = name;
-
-    listDeadline.textContent = deadline;
-
-    li.append(listItem);
-    listItem.append(listCheckbox);
-    listCheckbox.append(checkboxLabel);
-
-    listItem.append(listName);
-    listItem.append(listDeadline);
-    listItem.append(listActions);
-    listActions.append(trash);
+    const li = renderTask(task, container);
     container.appendChild(li);
   }
+}
+
+function renderTask(task, container) {
+  const { name, deadline } = task;
+
+  const li = document.createElement('li')
+  const listItem = div('list__item');
+  const listCheckbox = div('list__item-col list__item-col--checkbox');
+
+  const checkboxLabel = checkbox(task.completed, (checked) => {
+    task.completed = checked;
+    renderTasks(container);
+  });
+
+  const listName = div('list__item-col list__item-col--name');
+  const listDeadline = div('list__item-col list__item-col--deadline');
+  const listActions = div('list__item-col list__item-col--actions');
+
+  const trash = icon('icon icon--trash fa-solid fa-trash', () => {
+    const confirmed = window.confirm('このタスクを削除しますか？');
+    if (!confirmed) return;
+
+    state.tasks = state.tasks.filter((stateTask) => stateTask !== task)
+    renderTasks(container);
+  });
+
+  listName.textContent = name;
+  listDeadline.textContent = deadline;
+
+  li.append(listItem);
+  listItem.append(listCheckbox);
+  listCheckbox.append(checkboxLabel);
+
+  listItem.append(listName);
+  listItem.append(listDeadline);
+  listItem.append(listActions);
+  listActions.append(trash);
+
+  return li;
 }
 
 function onSubmitTask(container){
