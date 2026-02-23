@@ -46,7 +46,11 @@ function renderTask(task, container) {
   });
 
   const listName = div('list__item-col list__item-col--name');
+  listName.textContent = name;
+
   const listDeadline = div('list__item-col list__item-col--deadline');
+  listDeadline.textContent = deadline;
+
   const listActions = div('list__item-col list__item-col--actions');
 
   const trash = icon('icon icon--trash fa-solid fa-trash', () => {
@@ -57,17 +61,14 @@ function renderTask(task, container) {
     renderTasks(container);
   });
 
-  listName.textContent = name;
-  listDeadline.textContent = deadline;
+  listCheckbox.append(checkboxLabel);
+  listActions.append(trash);
+
+  listItem.append(
+      ...[listCheckbox, listName, listDeadline, listActions]
+  );
 
   li.append(listItem);
-  listItem.append(listCheckbox);
-  listCheckbox.append(checkboxLabel);
-
-  listItem.append(listName);
-  listItem.append(listDeadline);
-  listItem.append(listActions);
-  listActions.append(trash);
 
   return li;
 }
