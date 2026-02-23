@@ -24,11 +24,8 @@ const state = {
 
 function renderTasks(container) {
   container.innerHTML = '';
-  if (state.showCompleted) {
-    tasks = state.tasks;
-  } else {
-    tasks = state.tasks.filter((task) => !task.completed);
-  }
+
+  const tasks = state.tasks.filter(task => state.showCompleted || !task.completed)
 
   for (const task of tasks) {
     const { name, deadline } = task;
