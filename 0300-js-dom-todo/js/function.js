@@ -48,9 +48,62 @@ function renderTask(task, container) {
 
   const listName = div('list__item-col list__item-col--name');
   listName.textContent = name;
+  listName.addEventListener('click', () => {
+    if (listName.querySelector('input')) return;
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = task.name;
+
+    listName.textContent = '';
+    listName.appendChild(input);
+    input.focus();
+    input.select();
+
+    const commit = () => {
+      const inputText = input.value.trim();
+      if (!inputText) {
+        input.focus();
+        listName.textContent = task.name;
+        return;
+      }
+      task.name = inputText;
+      renderTasks(container);
+    };
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') commit();
+    });
+
+    input.addEventListener('blur', () => {
+      commit();
+    });
+  });
 
   const listDeadline = div('list__item-col list__item-col--deadline');
   listDeadline.textContent = deadline;
+  listDeadline.addEventListener('click', () => {
+  if (listDeadline.querySelector('input')) return;
+
+  const input = document.createElement('input');
+  input.type = 'date';
+  input.value = task.deadline.toString();
+
+  listDeadline.textContent = '';
+  listDeadline.appendChild(input);
+
+  input.focus();
+  input.showPicker?.();
+
+  const commit = () => {
+    task.deadline = AppDate.parse(input.value);
+
+    renderTasks(container);
+  };
+
+  input.addEventListener('change', commit);
+  input.addEventListener('blur', commit);
+});
 
   const listActions = div('list__item-col list__item-col--actions');
 
