@@ -26,6 +26,7 @@ function renderTasks(container) {
   container.innerHTML = '';
 
   const tasks = state.tasks.filter(task => state.showCompleted || !task.completed)
+  tasks.sort((a, b) => a.deadline.getTime() - b.deadline.getTime());
 
   for (const task of tasks) {
     const li = renderTask(task, container);
@@ -97,7 +98,7 @@ function onSubmitTask(container){
     completed: false,
   })
 
-  state.tasks.sort((a, b) => a.deadline.getTime() - b.deadline.getTime());
+  form.reset();
 
   renderTasks(container);
 }
