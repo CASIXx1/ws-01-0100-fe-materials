@@ -1,4 +1,3 @@
-
 const state = {
   showCompleted: false,
   tasks: [
@@ -42,6 +41,14 @@ function renderTask(task, container) {
   const listCheckbox = div('list__item-col list__item-col--checkbox');
 
   const checkboxLabel = checkbox(task.completed, (checked) => {
+    if (checked && !state.showCompleted) {
+      li.classList.add('list__item-col--fadeout');
+      setTimeout(() => {
+        task.completed = true;
+        renderTasks(container);
+      }, 1200);
+      return;
+    }
     task.completed = checked;
     renderTasks(container);
   });
@@ -51,16 +58,7 @@ function renderTask(task, container) {
   listName.addEventListener('click', () => {
     if (listName.querySelector('input')) return;
 
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.value = task.name;
-
-    listName.textContent = '';
-    listName.appendChild(input);
-    input.focus();
-    input.select();
-
-    const commit = () => {
+    const commit = (input) => {
       const inputText = input.value.trim();
       if (!inputText) {
         input.focus();
@@ -71,39 +69,44 @@ function renderTask(task, container) {
       renderTasks(container);
     };
 
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') commit();
+    const input = inputField({
+      type: 'text',
+      value: task.name,
+      klass: 'list__input',
+      onEnter: (input) => commit(input),
+      onBlur: (input) => commit(input),
     });
 
-    input.addEventListener('blur', () => {
-      commit();
-    });
+    listName.textContent = '';
+    listName.appendChild(input);
+    input.focus();
+    input.select();
   });
 
   const listDeadline = div('list__item-col list__item-col--deadline');
   listDeadline.textContent = deadline;
   listDeadline.addEventListener('click', () => {
-  if (listDeadline.querySelector('input')) return;
+    if (listDeadline.querySelector('input')) return;
 
-  const input = document.createElement('input');
-  input.type = 'date';
-  input.value = task.deadline.toString();
+    const commit = (input) => {
+      task.deadline = AppDate.parse(input.value);
+      renderTasks(container);
+    };
 
-  listDeadline.textContent = '';
-  listDeadline.appendChild(input);
+    const input = inputField({
+      type: 'date',
+      value: task.deadline.toString(),
+      klass: 'list__input',
+      onChange: (input) => commit(input),
+      onBlur: (input) => commit(input),
+    });
 
-  input.focus();
-  input.showPicker?.();
+    listDeadline.textContent = '';
+    listDeadline.appendChild(input);
 
-  const commit = () => {
-    task.deadline = AppDate.parse(input.value);
-
-    renderTasks(container);
-  };
-
-  input.addEventListener('change', commit);
-  input.addEventListener('blur', commit);
-});
+    input.focus();
+    input.showPicker?.();
+  });
 
   const listActions = div('list__item-col list__item-col--actions');
 
@@ -119,7 +122,7 @@ function renderTask(task, container) {
   listActions.append(trash);
 
   listItem.append(
-      ...[listCheckbox, listName, listDeadline, listActions]
+    ...[listCheckbox, listName, listDeadline, listActions]
   );
 
   li.append(listItem);

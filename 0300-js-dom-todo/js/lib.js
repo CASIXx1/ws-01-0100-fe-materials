@@ -95,4 +95,32 @@ function checkbox(checked, onClick) {
   return label
 }
 
+function inputField({ type, value, klass, onEnter, onBlur, onChange } = {}) {
+  const input = document.createElement('input')
+  input.type = type
+  input.value = value
 
+  if (klass) {
+    input.setAttribute('class', klass)
+  }
+
+  if (onEnter) {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') onEnter(input)
+    })
+  }
+
+  if (onBlur) {
+    input.addEventListener('blur', (e) => {
+      onBlur(input)
+    })
+  }
+
+  if (onChange) {
+    input.addEventListener('change', (e) => {
+      onChange(input)
+    })
+  }
+
+  return input
+}
