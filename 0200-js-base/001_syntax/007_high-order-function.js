@@ -6,6 +6,15 @@
  */
 
 function filter(array, cb) {
+  let filteredArray = [];
+
+  for (let i = 0; i < array.length; i++) {
+    if (cb(array[i], i)) {
+      filteredArray.push(array[i]);
+    }
+  }
+
+  return filteredArray;
 }
 
 /**
@@ -15,6 +24,13 @@ function filter(array, cb) {
  */
 
 function find(array, cb) {
+  for (let i = 0; i < array.length; i++) {
+    if (cb(array[i], i)) {
+      return array[i];
+    }
+  }
+
+  return undefined;
 }
 
 /**
@@ -24,6 +40,13 @@ function find(array, cb) {
  */
 
 function findIndex(array, cb) {
+  for (let i = 0; i < array.length; i++) {
+    if (cb(array[i], i)) {
+      return i;
+    }
+  }
+
+  return -1;
 }
 
 /**
@@ -33,6 +56,13 @@ function findIndex(array, cb) {
  */
 
 function some(array, cb) {
+  for (let i = 0; i < array.length; i++) {
+    if (cb(array[i], i)) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 /**
@@ -42,6 +72,13 @@ function some(array, cb) {
  */
 
 function every(array, cb) {
+  for (let i = 0; i < array.length; i++) {
+    if (!cb(array[i], i)) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 /**
@@ -52,6 +89,12 @@ function every(array, cb) {
  */
 
 function map(array, cb) {
+  let mappedArray = [];
+  for (i = 0; i < array.length; i++) {
+    mappedArray.push(cb(array[i], i));
+  }
+
+  return mappedArray;
 }
 
 /**
@@ -62,6 +105,9 @@ function map(array, cb) {
  */
 
 function forEach(array, cb) {
+  for (i = 0; i < array.length; i++) {
+    cb(array[i], i);
+  }
 }
 
 module.exports = {

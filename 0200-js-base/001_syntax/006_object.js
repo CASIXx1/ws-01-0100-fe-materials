@@ -8,6 +8,13 @@
  */
 
 function getPersonObject() {
+  const person = {
+    name: 'Bob',
+    age: 32,
+    gender: 'male',
+  };
+
+  return person;
 }
 
 /**
@@ -25,6 +32,9 @@ function getPersonObject() {
  */
 
 function keys(obj) {
+  for (const key in obj) {
+    console.log(key);
+  }
 }
 
 /**
@@ -42,6 +52,9 @@ function keys(obj) {
  */
 
 function values(obj) {
+  for (const key in obj) {
+    console.log(obj[key]);
+  }
 }
 
 /**
@@ -57,6 +70,8 @@ function values(obj) {
  */
 
 function doubleAge(person) {
+  person.age += 1;
+  return person;
 }
 
 /**
@@ -71,6 +86,9 @@ function doubleAge(person) {
  */
 
 function setProcessedFlag(obj) {
+  addFlagObj = { ...obj };
+  addFlagObj.processed = true;
+  return addFlagObj;
 }
 
 /**
@@ -96,6 +114,12 @@ function setProcessedFlag(obj) {
  */
 
 function assignNumber(persons) {
+  const addNumberPersons = {};
+  for (const value of persons) {
+    addNumberPersons[value] = Math.floor(Math.random() * 10) + 1;
+  }
+
+  return addNumberPersons;
 }
 
 /**
@@ -110,6 +134,7 @@ function assignNumber(persons) {
  */
 
 function isDuplicate(array) {
+  return array.length != new Set(array).size;
 }
 
 module.exports = {

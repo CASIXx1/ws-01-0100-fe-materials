@@ -16,6 +16,11 @@
  */
 
 function sumSequence (n, sum = 0) {
+  if (0 <= n) {
+    return sumSequence(n - 1, sum + n);
+  } else {
+    return sum;
+  }
 }
 
 /**
@@ -29,6 +34,17 @@ function sumSequence (n, sum = 0) {
  */
 
 function fibonacci (num) {
+  if (num === 0) {
+    return [];
+  } else if (num === 1) {
+    return [1];
+  } else if (num === 2) {
+    return [1, 1];
+  } else if (3 <= num) {
+    const addNum = fibonacci(num - 1);
+    addNum.push(addNum[addNum.length - 1] + addNum[addNum.length - 2]);
+    return addNum;
+  }
 }
 
 /**
@@ -43,6 +59,17 @@ function fibonacci (num) {
  */
 
 function flatten (data) {
+  let flattenData = [];
+
+  for (const value of data) {
+    if (Array.isArray(value)) {
+      flattenData.push(...flatten(value));
+    } else {
+      flattenData.push(value);
+    }
+  }
+
+  return flattenData;
 }
 
 
@@ -99,8 +126,18 @@ function flatten (data) {
  */
 
 function fileSize (node, sum = 0) {
-}
+  if (node.type === 'folder') {
+    sum = fileSize(node.children, sum);
+  } else if (Array.isArray(node)) {
+    for (const item of node) {
+      sum = fileSize(item, sum);
+    }
+  } else if (node.type === 'file') {
+    sum += node.size;
+  }
 
+  return sum;
+}
 
 module.exports = {
   sumSequence,
