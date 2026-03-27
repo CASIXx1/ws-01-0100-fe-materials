@@ -12,6 +12,9 @@
 
 
 /* [ここに実装] */
+export function add(a: number, b: number): number {
+    return a + b;
+}
 
 /* 1.2 以下の関数を実装して下さい
    関数名: sum
@@ -21,6 +24,9 @@
 */
 
 /* [ここに実装] */
+export function sum(array: number[]): number {
+    return array.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+}
 
 /* 1.3 以下の関数を実装して下さい
    関数名: format
@@ -30,6 +36,13 @@
 */
 
 /* [ここに実装] */
+export function format(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}/${month}/${day}`;
+}
 
 /* 1.4 以下の関数を実装して下さい
    関数名: merge
@@ -47,6 +60,15 @@
 */
 
 /* [ここに実装] */
+export function merge(a: Record<string, number>, b: Record<string, number>): Record<string, number> {
+    const mergedValue: Record<string, number> = {...a};
+    
+    for (const key in b) {
+        mergedValue[key] = (mergedValue[key] ?? 0) + b[key];
+    }
+
+    return mergedValue;
+}
 
 /* 1.5 以下の関数を実装して下さい
    関数名: stringify
@@ -64,3 +86,8 @@
 */
 
 /* [ここに実装] */
+export function stringify(
+  value: string | number | boolean | null | undefined
+): string {
+  return String(value);
+}
