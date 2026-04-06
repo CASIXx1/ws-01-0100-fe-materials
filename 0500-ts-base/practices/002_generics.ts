@@ -35,4 +35,102 @@ interface IQueue<T> {
 }
 
 // ↓↓↓ 以下に実装してください ↓↓↓
+class List<T> implements IList<T> {
+  data: T[] = [];
+
+  constructor(data: T[]) {
+    this.data = data;
+  }
+
+  get size(): number {
+    return this.data.length;
+  }
+
+  add(value: T): void {
+    this.data.push(value);
+  }
+
+  pop(): T | undefined {
+    return this.data.pop();
+  }
+
+  remove(index: number): T | undefined {
+    if (index < 0 || index >= this.data.length) {
+      return undefined;
+    }
+
+    const removed = this.data.splice(index, 1);
+    return removed[0];
+  }
+}
+
+class Stack<T> implements IStack<T> {
+  data: T[] = [];
+
+  constructor(data: T[]) {
+    this.data = data;
+  }
+
+  get size(): number {
+    return this.data.length;
+  }
+
+  push(value: T): void {
+    this.data.push(value);
+  }
+
+  pop(): T | undefined {
+    if (this.data.length > 0) {
+      return this.data.pop();
+    }
+
+    return undefined;
+  }
+
+  peak(): T | undefined {
+    if (this.data.length > 0) {
+      return this.data[this.data.length - 1];
+    }
+
+    return undefined;
+  }
+}
+
+class Queue<T> implements IQueue<T> {
+  data: T[] = [];
+
+  constructor(data: T[]) {
+    this.data = data;
+  }
+
+  get size(): number {
+    return this.data.length;
+  }
+
+  enqueue(value: T): void {
+    this.data.push(value);
+  }
+
+  dequeue(): T | undefined {
+    if (this.data.length > 0) {
+      return this.data.shift();
+    }
+
+    return undefined;
+  }
+
+  peak(): T | undefined {
+    if (this.data.length > 0) {
+      return this.data[0];
+    }
+
+    return undefined;
+  }
+}
+
+export {
+  List,
+  Stack,
+  Queue,
+};
 
