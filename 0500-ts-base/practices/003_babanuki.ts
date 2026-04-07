@@ -31,6 +31,63 @@
 import { Card, getRandomIndex, IPlayer, IGameMaster, ILogger, Logger } from "../lib/babanuki";
 
 export class Player implements IPlayer {
+  hands: Card[] = [];
+  name: string = 'デフォルトネーム';
+  done: boolean = false;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  get onlyJoker(): boolean {
+    return this.hands.length === 1 && this.hands[0].isJoker;
+  }
+
+  discard(): Card[] {
+    const discardedCards: Card[] = [];
+    const checkedCards: Card[] = [];
+
+    for (const currentCard of this.hands) {
+      if (currentCard.isJoker) {
+        checkedCards.push(currentCard);
+        continue;
+      }
+
+      const pairIndex = checkedCards.findIndex(c => c.value === currentCard.value);
+
+      if (pairIndex === -1) {
+        checkedCards.push(currentCard);
+      } else {
+        const pairedCard = checkedCards.splice(pairIndex, 1)[0];
+        discardedCards.push(pairedCard, currentCard);
+      }
+    }
+
+    this.hands = checkedCards;
+
+    if (this.hands.length === 0) {
+      this.done = true;
+    }
+
+    return discardedCards;
+  }
+
+  assign(card: Card) {
+    this.hands.push(card);
+  }
+
+  draw(targetPlayer: IPlayer): Card {
+    const index = getRandomIndex(targetPlayer.hands.length);
+    const drawnCard = targetPlayer.hands.splice(index, 1)[0];
+
+    this.assign(drawnCard);
+
+    if (targetPlayer.hands.length === 0) {
+      targetPlayer.done = true;
+    }
+
+    return drawnCard;
+  }
 }
 
 export class GameMaster implements IGameMaster {
