@@ -92,14 +92,86 @@ export class Player implements IPlayer {
 
 export class GameMaster implements IGameMaster {
   logger: ILogger;
+  cards: Card[];
   players: IPlayer[];
+  rank: IPlayer[];
+  turn: number;
 
   constructor(logger: ILogger, players: IPlayer[]) {
     this.logger = logger;
     this.players = players;
+    this.cards = Card.prepare();
+    this.rank = [];
+    this.turn = 1;
   }
 
-  run() {}
+  run() {
+    const totalCardLength = this.cards.length;
+
+    for (let i = 0; i < totalCardLength; i++) {
+      const randomCard = this.cards.splice(getRandomIndex(this.cards.length), 1)[0];
+      this.players[i % this.players.length].assign(randomCard);
+    }
+
+    this.logger.firstDiscard();
+
+    for (const player of this.players) {
+      this.logger.currentState(this.turn, player);
+      const discardedCard = player.discard();
+      this.logger.discard(player, discardedCard);
+
+      if (player.done) {
+        this.rank.push(player);
+        this.players.splice(this.players.indexOf(player), 1);
+        this.logger.done(player);
+      }
+
+      if (player.onlyJoker) {
+        this.logger.end(player, this.rank);
+        return;
+      }
+
+      this.turn++;
+    }
+
+    this.logger.start();
+
+    while (this.players.length > 1) {
+      console.log(`${this.turn} ===========`);
+      const currentPlayer = this.players[(this.turn - 1) % this.players.length];
+      const nextPlayer = this.players[this.turn % this.players.length];
+
+      this.logger.currentState(this.turn, currentPlayer);
+      this.logger.draw(currentPlayer, nextPlayer, currentPlayer.draw(nextPlayer));
+
+      if (nextPlayer.done) {
+        this.rank.push(nextPlayer);
+        this.players.splice(this.players.indexOf(nextPlayer), 1);
+        this.logger.done(nextPlayer);
+      }
+
+      const discardedCard = currentPlayer.discard();
+      this.logger.discard(currentPlayer, discardedCard);
+
+      if (currentPlayer.done) {
+        this.rank.push(currentPlayer);
+        this.players.splice(this.players.indexOf(currentPlayer), 1);
+        this.logger.done(currentPlayer);
+      }
+
+      if (currentPlayer.onlyJoker) {
+        this.logger.end(currentPlayer, this.rank);
+        return;
+      }
+
+      if (nextPlayer.onlyJoker) {
+        this.logger.end(nextPlayer, this.rank);
+        return;
+      }
+
+      this.turn++;
+    }
+  }
 }
 
 // [編集不要] ターミナルでの実行用の関数。
