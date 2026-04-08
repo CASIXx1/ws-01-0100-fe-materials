@@ -105,7 +105,7 @@ export class GameMaster implements IGameMaster {
     this.turn = 1;
   }
 
-  run() {
+  private dealCards() {
     const totalCardLength = this.cards.length;
 
     for (let i = 0; i < totalCardLength; i++) {
@@ -121,9 +121,7 @@ export class GameMaster implements IGameMaster {
       this.logger.discard(player, discardedCard);
 
       if (player.done) {
-        this.rank.push(player);
-        this.players.splice(this.players.indexOf(player), 1);
-        this.logger.done(player);
+        this.handleDonePlayer(player);
       }
 
       if (player.onlyJoker) {
@@ -134,6 +132,16 @@ export class GameMaster implements IGameMaster {
       this.turn++;
     }
 
+  }
+
+  private handleDonePlayer(player: IPlayer) {
+    this.rank.push(player);
+    this.players.splice(this.players.indexOf(player), 1);
+    this.logger.done(player);
+  }
+
+  run() {
+    this.dealCards();
     this.logger.start();
 
     while (this.players.length > 1) {
@@ -145,18 +153,14 @@ export class GameMaster implements IGameMaster {
       this.logger.draw(currentPlayer, nextPlayer, currentPlayer.draw(nextPlayer));
 
       if (nextPlayer.done) {
-        this.rank.push(nextPlayer);
-        this.players.splice(this.players.indexOf(nextPlayer), 1);
-        this.logger.done(nextPlayer);
+        this.handleDonePlayer(nextPlayer);
       }
 
       const discardedCard = currentPlayer.discard();
       this.logger.discard(currentPlayer, discardedCard);
 
       if (currentPlayer.done) {
-        this.rank.push(currentPlayer);
-        this.players.splice(this.players.indexOf(currentPlayer), 1);
-        this.logger.done(currentPlayer);
+        this.handleDonePlayer(currentPlayer);
       }
 
       if (currentPlayer.onlyJoker) {
