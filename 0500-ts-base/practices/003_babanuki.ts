@@ -82,10 +82,6 @@ export class Player implements IPlayer {
 
     this.assign(drawnCard);
 
-    if (targetPlayer.hands.length === 0) {
-      targetPlayer.done = true;
-    }
-
     return drawnCard;
   }
 }
@@ -121,7 +117,7 @@ export class GameMaster implements IGameMaster {
       this.logger.discard(player, discardedCard);
 
       if (player.done) {
-        this.handleDonePlayer(player);
+        this.handleNoHandsPlayer(player);
       }
 
       if (player.onlyJoker) {
@@ -131,10 +127,10 @@ export class GameMaster implements IGameMaster {
 
       this.turn++;
     }
-
   }
 
-  private handleDonePlayer(player: IPlayer) {
+  private handleNoHandsPlayer(player: IPlayer) {
+    player.done = true;
     this.rank.push(player);
     this.players.splice(this.players.indexOf(player), 1);
     this.logger.done(player);
@@ -152,24 +148,24 @@ export class GameMaster implements IGameMaster {
       this.logger.currentState(this.turn, currentPlayer);
       this.logger.draw(currentPlayer, nextPlayer, currentPlayer.draw(nextPlayer));
 
-      if (nextPlayer.done) {
-        this.handleDonePlayer(nextPlayer);
+      if (nextPlayer.hands.length === 0) {
+        this.handleNoHandsPlayer(nextPlayer);
+      }
+
+      if (nextPlayer.onlyJoker) {
+        this.logger.end(nextPlayer, this.rank);
+        return;
       }
 
       const discardedCard = currentPlayer.discard();
       this.logger.discard(currentPlayer, discardedCard);
 
-      if (currentPlayer.done) {
-        this.handleDonePlayer(currentPlayer);
+      if (currentPlayer.hands.length === 0) {
+        this.handleNoHandsPlayer(currentPlayer);
       }
 
       if (currentPlayer.onlyJoker) {
         this.logger.end(currentPlayer, this.rank);
-        return;
-      }
-
-      if (nextPlayer.onlyJoker) {
-        this.logger.end(nextPlayer, this.rank);
         return;
       }
 
