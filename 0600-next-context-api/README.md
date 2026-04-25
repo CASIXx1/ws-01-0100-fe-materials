@@ -26,9 +26,16 @@ $ unzip api.zip
 
 ### API 仕様書
 
-Swagger UI を使用して仕様を管理しています。こちらでエンドポイントやリクエストBodyを確認してください。
+Swagger UI を使用して仕様を管理しています。
+上記の api  の セットアップを行った後に、下記URLにアクセスして Swagger UI を確認してください。
 
-https://next-context-api.netlify.app/api/v1/spec
+```
+npm run dev
+```
+
+http://localhost:3000/api/v1/spec
+
+![Swagger UI](./images/swagger-ui.png)
 
 ## 課題の進め方
 
@@ -68,4 +75,5 @@ https://www.netlify.com/
     - [ ] タスク一覧画面(tasks)の実装。
     - [ ] プロジェクト一覧画面(tasks)の実装。
 
+各種アイコンにはこちらの　[react-icons | ionicon5] (https://react-icons.github.io/react-icons/icons/io5/) を使用しています。
 

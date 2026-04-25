@@ -11,7 +11,7 @@
 
 ### Context API
 
-- [Context API | React](https://ja.react.dev/learn/passing-data-deeply-with-context)
+- [Context API | コンテクストで深くデータを受け渡す](https://ja.react.dev/learn/passing-data-deeply-with-context)
 
 ### REST API
 
