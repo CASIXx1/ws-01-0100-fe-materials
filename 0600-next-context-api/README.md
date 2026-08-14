@@ -75,5 +75,4 @@ https://www.netlify.com/
     - [ ] タスク一覧画面(tasks)の実装。
     - [ ] プロジェクト一覧画面(tasks)の実装。
 
-各種アイコンにはこちらの　[react-icons | ionicon5] (https://react-icons.github.io/react-icons/icons/io5/) を使用しています。
-
+各種アイコンにはこちらの [lucide-react](https://lucide.dev/icons/) を使用しています。
