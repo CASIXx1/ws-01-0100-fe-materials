@@ -31,18 +31,147 @@
 import { Card, getRandomIndex, IPlayer, IGameMaster, ILogger, Logger } from "../lib/babanuki";
 
 export class Player implements IPlayer {
+  hands: Card[] = [];
+  name: string = 'デフォルトネーム';
+  done: boolean = false;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  get onlyJoker(): boolean {
+    return this.hands.length === 1 && this.hands[0].isJoker;
+  }
+
+  discard(): Card[] {
+    const discardedCards: Card[] = [];
+    const checkedCards: Card[] = [];
+
+    for (const currentCard of this.hands) {
+      if (currentCard.isJoker) {
+        checkedCards.push(currentCard);
+        continue;
+      }
+
+      const pairIndex = checkedCards.findIndex(c => c.value === currentCard.value);
+
+      if (pairIndex === -1) {
+        checkedCards.push(currentCard);
+      } else {
+        const pairedCard = checkedCards.splice(pairIndex, 1)[0];
+        discardedCards.push(pairedCard, currentCard);
+      }
+    }
+
+    this.hands = checkedCards;
+
+    if (this.hands.length === 0) {
+      this.done = true;
+    }
+
+    return discardedCards;
+  }
+
+  assign(card: Card) {
+    this.hands.push(card);
+  }
+
+  draw(targetPlayer: IPlayer): Card {
+    const index = getRandomIndex(targetPlayer.hands.length);
+    const drawnCard = targetPlayer.hands.splice(index, 1)[0];
+
+    this.assign(drawnCard);
+
+    return drawnCard;
+  }
 }
 
 export class GameMaster implements IGameMaster {
   logger: ILogger;
+  cards: Card[];
   players: IPlayer[];
+  rank: IPlayer[];
+  turn: number;
 
   constructor(logger: ILogger, players: IPlayer[]) {
     this.logger = logger;
     this.players = players;
+    this.cards = Card.prepare();
+    this.rank = [];
+    this.turn = 1;
   }
 
-  run() {}
+  private dealCards() {
+    const totalCardLength = this.cards.length;
+
+    for (let i = 0; i < totalCardLength; i++) {
+      const randomCard = this.cards.splice(getRandomIndex(this.cards.length), 1)[0];
+      this.players[i % this.players.length].assign(randomCard);
+    }
+
+    this.logger.firstDiscard();
+
+    for (const player of this.players) {
+      this.logger.currentState(this.turn, player);
+      const discardedCard = player.discard();
+      this.logger.discard(player, discardedCard);
+
+      if (player.done) {
+        this.handleNoHandsPlayer(player);
+      }
+
+      if (player.onlyJoker) {
+        this.logger.end(player, this.rank);
+        return;
+      }
+
+      this.turn++;
+    }
+  }
+
+  private handleNoHandsPlayer(player: IPlayer) {
+    player.done = true;
+    this.rank.push(player);
+    this.players.splice(this.players.indexOf(player), 1);
+    this.logger.done(player);
+  }
+
+  run() {
+    this.dealCards();
+    this.logger.start();
+
+    while (this.players.length > 1) {
+      console.log(`${this.turn} ===========`);
+      const currentPlayer = this.players[(this.turn - 1) % this.players.length];
+      const nextPlayer = this.players[this.turn % this.players.length];
+
+      this.logger.currentState(this.turn, currentPlayer);
+      this.logger.draw(currentPlayer, nextPlayer, currentPlayer.draw(nextPlayer));
+
+      if (nextPlayer.hands.length === 0) {
+        this.handleNoHandsPlayer(nextPlayer);
+      }
+
+      if (nextPlayer.onlyJoker) {
+        this.logger.end(nextPlayer, this.rank);
+        return;
+      }
+
+      const discardedCard = currentPlayer.discard();
+      this.logger.discard(currentPlayer, discardedCard);
+
+      if (currentPlayer.hands.length === 0) {
+        this.handleNoHandsPlayer(currentPlayer);
+      }
+
+      if (currentPlayer.onlyJoker) {
+        this.logger.end(currentPlayer, this.rank);
+        return;
+      }
+
+      this.turn++;
+    }
+  }
 }
 
 // [編集不要] ターミナルでの実行用の関数。
